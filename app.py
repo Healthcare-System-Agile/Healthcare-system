@@ -49,22 +49,24 @@ PAGE = """
 </html>
 """
 
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     modules = None
     error = None
     requirement = ""
-    
+
     if request.method == "POST":
         requirement = request.form.get("requirement", "").strip()
         if not requirement:
             error = "Please enter your requirements."
         else:
             modules = MODULES
-    
+
     return render_template_string(
         PAGE, requirement=requirement, modules=modules, error=error
     )
+
 
 if __name__ == "__main__":
     app.run(debug=True)
